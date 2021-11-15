@@ -16,8 +16,22 @@ library(here)
 
 # Read in the data
 
+Use the `read_csv()` fuction and the `here` package to read in ucsb_grad_data.csv
+
 ```{r}
-#Read in data
+# Read in data
 ucsb_grad <- read_csv(here("data", "ucsb_grad_data.csv"))
+```
+
+# Visualize Data
+
+Create a column graph showing the change in domestic enrollment (y-axis; domestic_enrollment) by year from 2008 - 2019 (x-axis; year_abbr)
+
+- Graph should be fill colored by race/ethnicity
+
+```{r}
+ggplot(data = ucsb_grad,
+       aes(x = year_abbr, y = domestic_enrollment)) +
+  geom_col(aes(fill = ethnicity))
 ```
 
