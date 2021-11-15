@@ -1,0 +1,23 @@
+---
+title: "Group 48 UCSB domestic grad enrollment"
+author: "Shuying Yu and Kiera Matiska"
+date: "11/15/2021"
+output: html_document
+---
+
+```{r setup, include = TRUE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+
+#Attach packages
+library(tidyverse)
+library(here)
+```
+
+
+# Read in the data
+
+```{r}
+#Read in data
+ucsb_grad <- read_csv(here("data", "ucsb_grad_data.csv"))
+```
+
