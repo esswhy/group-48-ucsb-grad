@@ -27,22 +27,15 @@ ucsb_grad <- read_csv(here("data", "ucsb_grad_data.csv"))
 
 Create a column graph showing the change in domestic enrollment (y-axis: `domestic_enrollment`) by year from 2008 - 2019 (x-axis: `year_abbr`)
 
-- Graph should be fill colored by ethnicity
-- Convert column counts to proportions
-
 ```{r}
-#Column plot
+# Column plot
 ggplot(data = ucsb_grad,
        aes(x = year_abbr, y = domestic_enrollment)) +
-  
-  #Define column
-  #Color by ethnicity
-  #Convert column counts to proportions
-  geom_col(aes(fill = ethnicity),
-           position = "fill") +
-  
-  #Change x-axis and y-axis labels
-  labs(x = "Year \n(abbreivated)",
-       y = "Domestic Graduate Enrollment at UCSB (%)")
+  geom_col(aes(fill = ethnicity), # #Define column and color by ethnicity
+           position = "fill") + # Convert column counts to proportions
+  labs(x = "Year \n(Abbreviated)",  # Change x-axis label
+       y = "Domestic Graduate Enrollment at UCSB (%)", # Change y-axis label
+       title = "Domestic Graduate Enrollment Demographics by Year") + # Add Title
+  theme_minimal() # Changed theme to minimal
 ```
-
+**Figure 1.** Domestic Graduate Enrollment Demographics by Year. From 2008 to 2019, white students dominated the enrollment numbers with upwards of 50% enrolled each year. All other races and ethnicities listed make up a much smaller percentage of the enrollment each year. 
