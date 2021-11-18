@@ -11,6 +11,8 @@ knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
 #Attach packages
 library(tidyverse)
 library(here)
+library(lubridate)
+library(RColorBrewer)
 ```
 
 
@@ -23,6 +25,17 @@ Use the `read_csv()` fuction and the `here` package to read in ucsb_grad_data.cs
 ucsb_grad <- read_csv(here("data", "ucsb_grad_data.csv"))
 ```
 
+# Clean Data
+
+Create new columns named `year_full` that extracts the full year from `year` column. We will use this in the plot for later.
+
+```{r}
+#Extract full year in new column
+#Substring first 4 characters from `year` column
+ucsb_grad$year_full <- substr(ucsb_grad$year, 1, 4)
+```
+
+
 # Visualize Data
 
 Create a column graph showing the change in domestic enrollment (y-axis: `domestic_enrollment`) by year from 2008 - 2019 (x-axis: `year_abbr`)
@@ -30,7 +43,7 @@ Create a column graph showing the change in domestic enrollment (y-axis: `domest
 ```{r}
 #Column plot
 ggplot(data = ucsb_grad,
-       aes(x = year_abbr, y = domestic_enrollment)) +
+       aes(x = year_full, y = domestic_enrollment)) +
   
   #Define column plot
   #Color by ethnicity
@@ -38,10 +51,13 @@ ggplot(data = ucsb_grad,
   geom_col(aes(fill = ethnicity),
            position = "fill") + 
   
+  #Change fill color
+  scale_fill_brewer(palette = "Set3") +
+  
   #Change x-axis and y-axis labels
   #Add title
   #Change legend title
-  labs(x = "Year \n(Abbreviated)",  
+  labs(x = "Year",  
        y = "Domestic Graduate Enrollment at UCSB (%)", 
        title = "Demographics of UCSB Domestic Graduate Student \nEnrollment from 2008 - 2019",
        fill = "Ethnicity") + 
@@ -50,7 +66,9 @@ ggplot(data = ucsb_grad,
   theme_minimal() +
   
   #Center title
-  theme(plot.title = element_text(hjust = 0.5))
+  #Change size of x-tick marks
+  theme(plot.title = element_text(hjust = 0.5),
+        axis.text.x = element_text(size = 9))
 ```
 **Figure 1.** Demographics of UCSB Domestic Graduate Student Enrollment by Year. From 2008 to 2019, white students dominated the enrollment numbers with upwards of 50% enrolled each year. All other races and ethnicities listed make up a much smaller percentage of the total enrollment each year. Data source: UCSB, Campus Profiles (2008-2019).
 
