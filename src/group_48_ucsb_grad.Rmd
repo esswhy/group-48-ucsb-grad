@@ -28,14 +28,30 @@ ucsb_grad <- read_csv(here("data", "ucsb_grad_data.csv"))
 Create a column graph showing the change in domestic enrollment (y-axis: `domestic_enrollment`) by year from 2008 - 2019 (x-axis: `year_abbr`)
 
 ```{r}
-# Column plot
+#Column plot
 ggplot(data = ucsb_grad,
        aes(x = year_abbr, y = domestic_enrollment)) +
-  geom_col(aes(fill = ethnicity), # #Define column and color by ethnicity
-           position = "fill") + # Convert column counts to proportions
-  labs(x = "Year \n(Abbreviated)",  # Change x-axis label
-       y = "Domestic Graduate Enrollment at UCSB (%)", # Change y-axis label
-       title = "Domestic Graduate Enrollment Demographics by Year") + # Add Title
-  theme_minimal() # Changed theme to minimal
+  
+  #Define column plot
+  #Color by ethnicity
+  #Convert column counts to proportions
+  geom_col(aes(fill = ethnicity),
+           position = "fill") + 
+  
+  #Change x-axis and y-axis labels
+  #Add title
+  #Change legend title
+  labs(x = "Year \n(Abbreviated)",  
+       y = "Domestic Graduate Enrollment at UCSB (%)", 
+       title = "Demographics of UCSB Domestic Graduate Student \nEnrollment from 2008 - 2019",
+       fill = "Ethnicity") + 
+  
+  #Change theme
+  theme_minimal() +
+  
+  #Center title
+  theme(plot.title = element_text(hjust = 0.5))
 ```
-**Figure 1.** Domestic Graduate Enrollment Demographics by Year. From 2008 to 2019, white students dominated the enrollment numbers with upwards of 50% enrolled each year. All other races and ethnicities listed make up a much smaller percentage of the enrollment each year. 
+**Figure 1.** Demographics of UCSB Domestic Graduate Student Enrollment by Year. From 2008 to 2019, white students dominated the enrollment numbers with upwards of 50% enrolled each year. All other races and ethnicities listed make up a much smaller percentage of the total enrollment each year. Data source: UCSB, Campus Profiles (2008-2019).
+
+**Data citation:** University of California, Santa Barbara, Office of Budget and Planning. Institutional Research, Planning, & Assessment, Campus Profiles (Years: 2008-2019). The Regents of the University of California. https://bap.ucsb.edu/institutional-research/campus-profiles. 
